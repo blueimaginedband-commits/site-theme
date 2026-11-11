@@ -3,38 +3,48 @@
     "bi_home": {
       "type": "bi-home",
       "blocks": {
-        "release_sometimes": {
+        "top_sometimes": {
           "type": "release",
           "settings": {
-            "image": "shopify://shop_images/sometiems.jpg",
-            "title": "Sometimes / I Found Love",
-            "tag": "Spotify ↗",
-            "url": "https://open.spotify.com/album/4gv1HdzwmzrMZOpBZxPvod"
+            "cover_file": "bi-cover-sometimes.jpg",
+            "title": "Sometimes",
+            "tag": "",
+            "url": "https://open.spotify.com/track/4D7pqnF6VzLbwF96Ywe8H5"
           }
         },
-        "release_many_times": {
+        "top_safe_and_sound": {
           "type": "release",
           "settings": {
-            "image": "shopify://shop_images/manytimes.png",
-            "title": "Many Times",
-            "tag": "Spotify ↗",
-            "url": "https://open.spotify.com/track/5FtNNjlajaOQUy7tKlBn6W"
+            "cover_file": "bi-cover-safe-and-sound.jpg",
+            "title": "Safe & Sound",
+            "tag": "",
+            "url": "https://open.spotify.com/track/4FIZXjlSanfxKxzuve3OEy"
           }
         },
-        "release_knight": {
+        "top_i_found_love": {
           "type": "release",
           "settings": {
-            "image": "shopify://shop_images/a_nice_dress.jpg",
-            "title": "Knight / A Nice Dress",
-            "tag": "Spotify ↗",
-            "url": "https://open.spotify.com/album/3T7NXgEfrhgWbTIByaq4Rb"
+            "cover_file": "bi-cover-i-found-love.jpg",
+            "title": "I Found Love",
+            "tag": "",
+            "url": "https://open.spotify.com/track/2BHrthgYRSGWenDA8DPi7a"
+          }
+        },
+        "top_a_nice_dress": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-cover-a-nice-dress.jpg",
+            "title": "A Nice Dress",
+            "tag": "",
+            "url": "https://open.spotify.com/track/1vAJtLfhS4L6hV5Yck843A"
           }
         }
       },
       "block_order": [
-        "release_sometimes",
-        "release_many_times",
-        "release_knight"
+        "top_sometimes",
+        "top_safe_and_sound",
+        "top_i_found_love",
+        "top_a_nice_dress"
       ],
       "settings": {
         "color_scheme": "scheme-2",
@@ -43,9 +53,9 @@
         "apple_url": "https://music.apple.com/us/artist/blue-imagined/1719688130",
         "youtube_url": "https://www.youtube.com/@BlueImagined1",
         "music_heading": "Music",
-        "music_label": "Start here",
-        "music_all_label": "All music",
-        "music_all_url": "/pages/music",
+        "music_label": "Top songs",
+        "music_all_label": "All releases",
+        "music_all_url": "https://open.spotify.com/artist/6tQZ5A1EKJnSlcyj5iZqZZ",
         "collection": "frontpage",
         "products_to_show": 4,
         "merch_heading": "Merch",
