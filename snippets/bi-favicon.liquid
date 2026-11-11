@@ -1,0 +1,12 @@
+{%- comment -%}
+  Favicon and home-screen icons (white star from the wordmark).
+  A favicon picked in Theme settings > Favicon takes over the browser-tab icon.
+{%- endcomment -%}
+{%- if settings.favicon != blank -%}
+  <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+{%- else -%}
+  <link rel="icon" type="image/svg+xml" href="{{ 'bi-favicon.svg' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ 'bi-favicon-32.png' | asset_url }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ 'bi-icon-192.png' | asset_url }}">
+{%- endif -%}
+<link rel="apple-touch-icon" sizes="180x180" href="{{ 'bi-apple-touch-icon.png' | asset_url }}">
