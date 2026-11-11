@@ -67,12 +67,10 @@
     </div>
 
     {%- capture listen_links -%}
-      {%- if section.settings.spotify_url != blank -%}<a href="{{ section.settings.spotify_url }}" target="_blank" rel="noopener">Spotify</a>{%- endif -%}
-      {%- if section.settings.apple_url != blank -%}<a href="{{ section.settings.apple_url }}" target="_blank" rel="noopener">Apple Music</a>{%- endif -%}
-      {%- if section.settings.youtube_url != blank -%}<a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener">YouTube</a>{%- endif -%}
+      {%- render 'bi-streaming-icons', spotify: section.settings.spotify_url, apple: section.settings.apple_url, youtube: section.settings.youtube_url -%}
     {%- endcapture -%}
     {%- if listen_links != blank -%}
-      <div class="bi-more"><p class="bi-more__listen">Listen on {{ listen_links }}</p></div>
+      <div class="bi-more"><p class="bi-more__listen"><span>Listen on</span> {{ listen_links }}</p></div>
     {%- endif -%}
   </section>
 </div>

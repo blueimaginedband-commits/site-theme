@@ -41,27 +41,6 @@
   gap: 1.2rem;
   margin-top: 2.6rem;
 }
-.bi-listen a,
-.bi-more__listen a {
-  display: inline-block;
-  font-family: var(--bi-body);
-  line-height: 1.2;
-  border: 1px solid var(--bi-cobalt);
-  color: rgb(var(--color-foreground));
-  padding: 1.2rem 2.2rem 1.1rem;
-  font-size: 1.25rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-.bi-listen a:hover,
-.bi-more__listen a:hover {
-  background: var(--bi-cobalt);
-  color: var(--bi-night);
-  box-shadow: 0 0 24px rgba(59, 116, 255, 0.5);
-}
-
 @keyframes bi-drift { from { transform: scale(1.12); } to { transform: none; } }
 @keyframes bi-rise { from { transform: translateY(-24px); opacity: 0; } to { transform: none; opacity: 1; } }
 /* Neon-sign flicker: a quick stutter, a small blink, then a deep double flicker */
@@ -174,14 +153,6 @@
   text-transform: uppercase;
   color: rgba(var(--color-foreground), 0.6);
 }
-.bi-more .bi-more__listen a {
-  font-family: var(--bi-body);
-  font-size: 1.15rem;
-  letter-spacing: 0.2em;
-  padding: 0.9rem 1.6rem 0.8rem;
-  color: rgb(var(--color-foreground));
-}
-.bi-more .bi-more__listen a:hover { color: var(--bi-night); }
 
 /* Music: square covers, title centred underneath */
 .bi-card--release .bi-card__meta { flex-direction: column; align-items: center; text-align: center; gap: 0.4rem; }
@@ -235,6 +206,36 @@
 
 .bi-home a:focus-visible { outline: 2px solid var(--bi-frost); outline-offset: 4px; }
 
+
+/* Streaming icons (replace the text buttons) */
+.bi-listen { gap: clamp(2.4rem, 4vw, 3.6rem); align-items: center; }
+.bi-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  transition: color 0.2s, filter 0.2s, transform 0.2s;
+}
+.bi-icon-link svg { width: 2.8rem; height: 2.8rem; fill: currentColor; display: block; }
+.bi-icon-link:hover,
+.bi-icon-link:focus-visible {
+  color: var(--bi-frost);
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 10px rgba(59, 116, 255, 0.85));
+  background: none;
+  box-shadow: none;
+}
+.bi-listen .bi-icon-link,
+.bi-more .bi-more__listen .bi-icon-link { padding: 0; border: 0; background: none; letter-spacing: 0; }
+.bi-more__listen .bi-icon-link { width: 3.6rem; height: 3.6rem; }
+.bi-more__listen .bi-icon-link svg { width: 2.2rem; height: 2.2rem; }
+
 @media screen and (max-width: 989px) {
   .bi-grid, .bi-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bi-grid--3 .bi-card:last-child { grid-column: 1 / -1; }
@@ -245,7 +246,6 @@
   .bi-card--product .bi-card__meta h3 { font-size: 2rem; }
   .bi-sec__head { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
   .bi-card__meta { flex-direction: column; gap: 0.4rem; }
-  .bi-listen a { padding: 1rem 1.4rem 0.9rem; font-size: 1.1rem; letter-spacing: 0.14em; }
   .bi-hero__logo { width: 88%; margin-top: -20vw; }
 }
 @media (prefers-reduced-motion: reduce) {
