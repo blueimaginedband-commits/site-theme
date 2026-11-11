@@ -1,0 +1,14 @@
+{%- comment -%}
+  Blue Imagined wordmark (lowercase with a small star). Used in the header.
+  The file lives at assets/bi-logo.svg; swap that file to change the logo everywhere.
+{%- endcomment -%}
+<div class="header__heading-logo-wrapper bi-wordmark">
+  <img
+    src="{{ 'bi-logo.svg' | asset_url }}"
+    alt="{{ shop.name | escape }}"
+    class="header__heading-logo"
+    width="1342"
+    height="224"
+    fetchpriority="high"
+  >
+</div>

@@ -1,0 +1,192 @@
+{%- comment -%}
+  Blue Imagined homepage: full-bleed photo with the glowing wordmark over its bottom edge,
+  then Music (one block per release), Merch (from a collection) and Tour.
+  Everything is editable in the theme editor.
+{%- endcomment -%}
+
+{{ 'section-bi-home.css' | asset_url | stylesheet_tag }}
+
+<div class="bi-home color-{{ section.settings.color_scheme }} gradient">
+  <div class="bi-hero">
+    <div class="bi-hero__photo">
+      {%- if section.settings.hero_image != blank -%}
+        {{
+          section.settings.hero_image
+          | image_url: width: 2400
+          | image_tag:
+            widths: '750, 1100, 1500, 1800, 2400',
+            sizes: '100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: section.settings.hero_image.alt
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div class="bi-hero__logo">
+      <img src="{{ 'bi-logo.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="1342" height="224">
+    </div>
+    {%- liquid
+      assign links = ''
+      if section.settings.spotify_url != blank
+        assign links = links | append: '<a href="' | append: section.settings.spotify_url | append: '" target="_blank" rel="noopener">Spotify</a>'
+      endif
+      if section.settings.apple_url != blank
+        if links != blank
+          assign links = links | append: '<span aria-hidden="true">/</span>'
+        endif
+        assign links = links | append: '<a href="' | append: section.settings.apple_url | append: '" target="_blank" rel="noopener">Apple Music</a>'
+      endif
+      if section.settings.youtube_url != blank
+        if links != blank
+          assign links = links | append: '<span aria-hidden="true">/</span>'
+        endif
+        assign links = links | append: '<a href="' | append: section.settings.youtube_url | append: '" target="_blank" rel="noopener">YouTube</a>'
+      endif
+    -%}
+    {%- if links != blank -%}
+      <p class="bi-hero__links page-width">{{ links }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- assign releases = section.blocks | where: 'type', 'release' -%}
+  {%- if releases.size > 0 -%}
+    <section id="music" class="bi-sec page-width">
+      <div class="bi-sec__head">
+        <h2>{{ section.settings.music_heading | escape }}</h2>
+        {%- if section.settings.music_label != blank -%}<p>{{ section.settings.music_label | escape }}</p>{%- endif -%}
+      </div>
+      <div class="bi-grid bi-grid--{{ releases.size | at_most: 4 }}">
+        {%- for block in releases -%}
+          <a class="bi-card" href="{{ block.settings.url | default: '#' }}" {% if block.settings.url contains 'http' %}target="_blank" rel="noopener"{% endif %} {{ block.shopify_attributes }}>
+            <div class="bi-card__art">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 900
+                  | image_tag: widths: '400, 600, 900', sizes: '(min-width: 990px) 33vw, 50vw', loading: 'lazy', alt: block.settings.title
+                }}
+              {%- else -%}
+                {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              <span class="bi-card__cta">{{ 'Listen now' }}</span>
+            </div>
+            <div class="bi-card__meta">
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.tag != blank -%}<span class="bi-card__tag">{{ block.settings.tag | escape }}</span>{%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.music_all_url != blank -%}
+        <div class="bi-more"><a href="{{ section.settings.music_all_url }}">{{ section.settings.music_all_label | escape }}</a></div>
+      {%- endif -%}
+    </section>
+  {%- endif -%}
+
+  {%- assign merch = section.settings.collection -%}
+  {%- if merch != blank and merch.products_count > 0 -%}
+    <section id="merch" class="bi-sec page-width">
+      <div class="bi-sec__head">
+        <h2>{{ section.settings.merch_heading | escape }}</h2>
+        {%- if section.settings.merch_label != blank -%}<p>{{ section.settings.merch_label | escape }}</p>{%- endif -%}
+      </div>
+      <div class="bi-grid bi-grid--4">
+        {%- for product in merch.products limit: section.settings.products_to_show -%}
+          <a class="bi-card" href="{{ product.url }}">
+            <div class="bi-card__art bi-card__art--product">
+              {%- if product.featured_media != blank -%}
+                {%- assign media_alt = product.featured_media.alt | default: product.title | escape -%}
+                {{
+                  product.featured_media
+                  | image_url: width: 800
+                  | image_tag: widths: '300, 500, 800', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', alt: media_alt
+                }}
+              {%- else -%}
+                {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              <span class="bi-card__cta">{%- if product.available -%}Shop{%- else -%}Sold out{%- endif -%}</span>
+            </div>
+            <div class="bi-card__meta">
+              <h3>{{ product.title | escape }}</h3>
+              <span class="bi-card__tag">
+                {%- if product.price_varies -%}From {% endif -%}
+                {{- product.price_min | money_without_trailing_zeros -}}
+              </span>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+      <div class="bi-more"><a href="{{ section.settings.merch_all_url | default: merch.url }}">{{ section.settings.merch_all_label | escape }}</a></div>
+    </section>
+  {%- endif -%}
+
+  {%- if section.settings.tour_heading != blank -%}
+    <section id="tour" class="bi-sec page-width">
+      <div class="bi-sec__head">
+        <h2>{{ section.settings.tour_title | escape }}</h2>
+        {%- if section.settings.tour_label != blank -%}<p>{{ section.settings.tour_label | escape }}</p>{%- endif -%}
+      </div>
+      <div class="bi-tour">
+        <div>
+          <p class="bi-tour__big">{{ section.settings.tour_heading | escape }}</p>
+          {%- if section.settings.tour_text != blank -%}<div class="bi-tour__text">{{ section.settings.tour_text }}</div>{%- endif -%}
+        </div>
+        {%- if section.settings.tour_button_label != blank and section.settings.tour_button_url != blank -%}
+          <a class="bi-pill" href="{{ section.settings.tour_button_url }}" {% if section.settings.tour_button_url contains 'http' %}target="_blank" rel="noopener"{% endif %}>{{ section.settings.tour_button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blue Imagined home",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-2" },
+    { "type": "header", "content": "Top photo" },
+    { "type": "image_picker", "id": "hero_image", "label": "Photo" },
+    { "type": "url", "id": "spotify_url", "label": "Spotify link" },
+    { "type": "url", "id": "apple_url", "label": "Apple Music link" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube link" },
+    { "type": "header", "content": "Music" },
+    { "type": "text", "id": "music_heading", "label": "Heading", "default": "Music" },
+    { "type": "text", "id": "music_label", "label": "Small label", "default": "Start here" },
+    { "type": "text", "id": "music_all_label", "label": "See-all link text", "default": "All music" },
+    { "type": "url", "id": "music_all_url", "label": "See-all link" },
+    { "type": "header", "content": "Merch" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "text", "id": "merch_heading", "label": "Heading", "default": "Merch" },
+    { "type": "text", "id": "merch_label", "label": "Small label", "default": "New stuff" },
+    { "type": "text", "id": "merch_all_label", "label": "See-all link text", "default": "All merch" },
+    { "type": "url", "id": "merch_all_url", "label": "See-all link", "info": "Leave empty to link to the collection." },
+    { "type": "header", "content": "Tour" },
+    { "type": "text", "id": "tour_title", "label": "Heading", "default": "Tour" },
+    { "type": "text", "id": "tour_label", "label": "Small label", "default": "Live dates" },
+    { "type": "text", "id": "tour_heading", "label": "Big text", "default": "Coming soon", "info": "Leave empty to hide the Tour section." },
+    { "type": "richtext", "id": "tour_text", "label": "Text", "default": "<p>No shows announced yet. New dates go up on Instagram first.</p>" },
+    { "type": "text", "id": "tour_button_label", "label": "Button text", "default": "Get notified" },
+    { "type": "url", "id": "tour_button_url", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "release",
+      "name": "Release",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Cover art" },
+        { "type": "text", "id": "title", "label": "Title", "default": "New release" },
+        { "type": "text", "id": "tag", "label": "Small label", "default": "Spotify ↗" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Blue Imagined home", "blocks": [ { "type": "release" }, { "type": "release" }, { "type": "release" } ] }
+  ]
+}
+{% endschema %}
