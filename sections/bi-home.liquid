@@ -86,7 +86,7 @@
       </div>
       <div class="bi-grid bi-grid--4">
         {%- for product in merch.products limit: section.settings.products_to_show -%}
-          <a class="bi-card" href="{{ product.url }}">
+          <a class="bi-card bi-card--product" href="{{ product.url }}">
             <div class="bi-card__art bi-card__art--product">
               {%- if product.featured_media != blank -%}
                 {%- assign media_alt = product.featured_media.alt | default: product.title | escape -%}

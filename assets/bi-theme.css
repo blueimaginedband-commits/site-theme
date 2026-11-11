@@ -95,7 +95,15 @@ h3, .h3, h4, .h4 { font-family: var(--bi-display); font-weight: 400; text-transf
 /* Product cards */
 .card__heading { font-size: clamp(2rem, 2.2vw, 2.8rem); }
 .card .price { font-size: 1.2rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.75; }
-.card__inner { background: var(--bi-deep); }
+.card__inner,
+.card .card__media,
+.card .media,
+.product__media-item .media,
+.product-media-container,
+.global-media-settings { background: transparent !important; }
+.card-wrapper .card__media .media img { object-fit: contain; }
+.card__information { text-align: center; }
+.card__heading { text-transform: none; }
 
 /* Buttons: square, thin cobalt outline that fills on hover */
 .button, .shopify-payment-button__button--unbranded {
