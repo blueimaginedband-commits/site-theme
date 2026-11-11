@@ -72,9 +72,6 @@
         {%- if section.settings.music_all_url != blank -%}
           <a href="{{ section.settings.music_all_url }}">{{ section.settings.music_all_label | escape }}</a>
         {%- endif -%}
-        {%- if listen_links != blank -%}
-          <p class="bi-more__listen">Listen on {{ listen_links }}</p>
-        {%- endif -%}
       </div>
     </section>
   {%- endif -%}
