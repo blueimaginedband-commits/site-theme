@@ -30,7 +30,7 @@
   width: 100%;
   height: auto;
   filter: var(--bi-glow);
-  animation: bi-rise 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both 0.15s, bi-flicker 6s infinite 2s;
+  animation: bi-rise 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both 0.15s, bi-flicker 4.2s infinite 1.6s;
 }
 .bi-listen {
   position: relative;
@@ -64,7 +64,16 @@
 
 @keyframes bi-drift { from { transform: scale(1.12); } to { transform: none; } }
 @keyframes bi-rise { from { transform: translateY(-24px); opacity: 0; } to { transform: none; opacity: 1; } }
-@keyframes bi-flicker { 0%, 91%, 95%, 100% { opacity: 1; } 92% { opacity: 0.55; } 93% { opacity: 1; } 94% { opacity: 0.7; } }
+/* Neon-sign flicker: a quick stutter, a small blink, then a deep double flicker */
+@keyframes bi-flicker {
+  0%, 7%, 9.5%, 12%, 46%, 48%, 79%, 81.5%, 84%, 86.5%, 100% { opacity: 1; }
+  8% { opacity: 0.25; }
+  10.5% { opacity: 0.45; }
+  47% { opacity: 0.6; }
+  80% { opacity: 0.15; }
+  83% { opacity: 0.4; }
+  85.5% { opacity: 0.2; }
+}
 
 /* Sections */
 .bi-sec { padding-top: clamp(64px, 9vw, 120px); }
