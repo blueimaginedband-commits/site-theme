@@ -32,23 +32,31 @@
   filter: var(--bi-glow);
   animation: bi-rise 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both 0.15s, bi-flicker 6s infinite 2s;
 }
-.bi-hero__links {
-  text-align: center;
-  margin: 2.2rem auto 0;
-  font-size: 1.3rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(var(--color-foreground), 0.6);
+.bi-listen {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 2.6rem;
 }
-.bi-hero__links a {
+.bi-listen a,
+.bi-more__listen a {
+  display: inline-block;
+  border: 1px solid var(--bi-cobalt);
   color: rgb(var(--color-foreground));
+  padding: 1.2rem 2.2rem 1.1rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   text-decoration: none;
-  border-bottom: 1px solid var(--bi-line);
-  padding-bottom: 2px;
-  transition: color 0.2s, border-color 0.2s;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
-.bi-hero__links a:hover { color: var(--bi-frost); border-color: var(--bi-frost); }
-.bi-hero__links span { margin: 0 0.8em; color: var(--bi-cobalt); }
+.bi-listen a:hover,
+.bi-more__listen a:hover {
+  background: var(--bi-cobalt);
+  color: var(--bi-night);
+  box-shadow: 0 0 24px rgba(59, 116, 255, 0.5);
+}
 
 @keyframes bi-drift { from { transform: scale(1.12); } to { transform: none; } }
 @keyframes bi-rise { from { transform: translateY(-24px); opacity: 0; } to { transform: none; opacity: 1; } }
@@ -141,6 +149,26 @@
   transition: color 0.2s;
 }
 .bi-more a:hover { color: var(--bi-frost); }
+.bi-more__listen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem 1.2rem;
+  margin: 2.4rem 0 0;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
+}
+.bi-more .bi-more__listen a {
+  font-family: var(--bi-body);
+  font-size: 1.15rem;
+  letter-spacing: 0.2em;
+  padding: 0.9rem 1.6rem 0.8rem;
+  color: rgb(var(--color-foreground));
+}
+.bi-more .bi-more__listen a:hover { color: var(--bi-night); }
 
 /* Tour */
 .bi-tour {
@@ -179,7 +207,7 @@
 @media screen and (max-width: 559px) {
   .bi-sec__head { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
   .bi-card__meta { flex-direction: column; gap: 0.4rem; }
-  .bi-hero__links { font-size: 1.1rem; letter-spacing: 0.16em; }
+  .bi-listen a { padding: 1rem 1.4rem 0.9rem; font-size: 1.1rem; letter-spacing: 0.14em; }
   .bi-hero__logo { width: 88%; margin-top: -20vw; }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -27,26 +27,13 @@
     <div class="bi-hero__logo">
       <img src="{{ 'bi-logo.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="1342" height="224">
     </div>
-    {%- liquid
-      assign links = ''
-      if section.settings.spotify_url != blank
-        assign links = links | append: '<a href="' | append: section.settings.spotify_url | append: '" target="_blank" rel="noopener">Spotify</a>'
-      endif
-      if section.settings.apple_url != blank
-        if links != blank
-          assign links = links | append: '<span aria-hidden="true">/</span>'
-        endif
-        assign links = links | append: '<a href="' | append: section.settings.apple_url | append: '" target="_blank" rel="noopener">Apple Music</a>'
-      endif
-      if section.settings.youtube_url != blank
-        if links != blank
-          assign links = links | append: '<span aria-hidden="true">/</span>'
-        endif
-        assign links = links | append: '<a href="' | append: section.settings.youtube_url | append: '" target="_blank" rel="noopener">YouTube</a>'
-      endif
-    -%}
-    {%- if links != blank -%}
-      <p class="bi-hero__links page-width">{{ links }}</p>
+    {%- capture listen_links -%}
+      {%- if section.settings.spotify_url != blank -%}<a href="{{ section.settings.spotify_url }}" target="_blank" rel="noopener">Spotify</a>{%- endif -%}
+      {%- if section.settings.apple_url != blank -%}<a href="{{ section.settings.apple_url }}" target="_blank" rel="noopener">Apple Music</a>{%- endif -%}
+      {%- if section.settings.youtube_url != blank -%}<a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener">YouTube</a>{%- endif -%}
+    {%- endcapture -%}
+    {%- if listen_links != blank -%}
+      <nav class="bi-listen page-width" aria-label="Listen">{{ listen_links }}</nav>
     {%- endif -%}
   </div>
 
@@ -79,9 +66,14 @@
           </a>
         {%- endfor -%}
       </div>
-      {%- if section.settings.music_all_url != blank -%}
-        <div class="bi-more"><a href="{{ section.settings.music_all_url }}">{{ section.settings.music_all_label | escape }}</a></div>
-      {%- endif -%}
+      <div class="bi-more">
+        {%- if section.settings.music_all_url != blank -%}
+          <a href="{{ section.settings.music_all_url }}">{{ section.settings.music_all_label | escape }}</a>
+        {%- endif -%}
+        {%- if listen_links != blank -%}
+          <p class="bi-more__listen">Listen on {{ listen_links }}</p>
+        {%- endif -%}
+      </div>
     </section>
   {%- endif -%}
 
