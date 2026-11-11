@@ -33,6 +33,8 @@
   animation: bi-rise 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both 0.15s, bi-flicker 6s infinite 2s;
 }
 .bi-listen {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -42,6 +44,8 @@
 .bi-listen a,
 .bi-more__listen a {
   display: inline-block;
+  font-family: var(--bi-body);
+  line-height: 1.2;
   border: 1px solid var(--bi-cobalt);
   color: rgb(var(--color-foreground));
   padding: 1.2rem 2.2rem 1.1rem;
