@@ -1,1 +1,211 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"padding_top":0,"padding_bottom":0}},"multicolumn_cwrWV9":{"type":"multicolumn","blocks":{"column_wpDfn3":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/sometiems.jpg","title":"SOMETIMES\/I FOUND LOVE","text":"","link_label":"Listen Now","link":"https:\/\/open.spotify.com\/album\/4gv1HdzwmzrMZOpBZxPvod?si=hyHCHGwGRuugCPfQSTe9Gg"}},"column_L4AarF":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/manytimes.png","title":"MANY TIMES","text":"","link_label":"LISTEN NOW","link":"https:\/\/open.spotify.com\/track\/5FtNNjlajaOQUy7tKlBn6W?si=2d9ccb43afec4315"}},"column_ttLAUC":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/a_nice_dress.jpg","title":"KNIGHT\/A NICE DRESS","text":"","link_label":"Listen Now","link":"https:\/\/open.spotify.com\/album\/3T7NXgEfrhgWbTIByaq4Rb?si=ORs36SoHTvakbWxDd8kraA"}}},"block_order":["column_wpDfn3","column_L4AarF","column_ttLAUC"],"name":"t:sections.multicolumn.presets.name","settings":{"title":"START HERE:","heading_size":"h1","image_width":"full","image_ratio":"adapt","button_label":"ALL MUSIC","button_link":"https:\/\/open.spotify.com\/artist\/6tQZ5A1EKJnSlcyj5iZqZZ?si=EAyVSt2uTAOGWlvJkU8lEA","columns_desktop":3,"column_alignment":"left","background_style":"primary","color_scheme":"scheme-2","columns_mobile":"1","swipe_on_mobile":false,"padding_top":0,"padding_bottom":36}}},"order":["main","multicolumn_cwrWV9"]}
+{
+  "sections": {
+    "main": {
+      "type": "bi-music-page",
+      "blocks": {
+        "release_running_away": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-running-away.jpg",
+            "title": "Running Away",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/running-away-single/6794278474"
+          }
+        },
+        "release_safe_sound": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-safe-sound.jpg",
+            "title": "Safe & Sound",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/safe-sound-single/6777359380"
+          }
+        },
+        "release_sooner": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-sooner.jpg",
+            "title": "Sooner",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/sooner-single/1895360987"
+          }
+        },
+        "release_caving_in": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-caving-in.jpg",
+            "title": "Caving In",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/caving-in-single/1882788182"
+          }
+        },
+        "release_i_want_you": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-i-want-you.jpg",
+            "title": "I Want You",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/i-want-you-single/1868748541"
+          }
+        },
+        "release_honestly": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-honestly.jpg",
+            "title": "Honestly",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/honestly-single/1850220532"
+          }
+        },
+        "release_knight_a_nice_dress": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-knight-a-nice-dress.jpg",
+            "title": "Knight / A Nice Dress",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/knight-a-nice-dress-single/1842622148"
+          }
+        },
+        "release_a_nice_dress": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-a-nice-dress.jpg",
+            "title": "A Nice Dress",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/a-nice-dress-single/1820661698"
+          }
+        },
+        "release_screaming_shouting": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-screaming-shouting.jpg",
+            "title": "Screaming, Shouting",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/screaming-shouting-single/1805436042"
+          }
+        },
+        "release_maybe_i": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-maybe-i.jpg",
+            "title": "Maybe I",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/maybe-i-single/1795631838"
+          }
+        },
+        "release_time_went_by": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-time-went-by.jpg",
+            "title": "Time Went By",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/time-went-by-single/1790611144"
+          }
+        },
+        "release_many_times": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-many-times.jpg",
+            "title": "Many Times",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/many-times-single/1780958584"
+          }
+        },
+        "release_lush": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-lush.jpg",
+            "title": "Lush",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/lush-single/1771207736"
+          }
+        },
+        "release_dreams": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-dreams.jpg",
+            "title": "Dreams",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/dreams-single/1754878789"
+          }
+        },
+        "release_arruba": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-arruba.jpg",
+            "title": "Arruba",
+            "kind": "ep",
+            "url": "https://music.apple.com/us/album/arruba-ep/1751066012"
+          }
+        },
+        "release_you_i": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-you-i.jpg",
+            "title": "You & I",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/you-i-single/1748739958"
+          }
+        },
+        "release_sometimes_i_found_love": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-sometimes-i-found-love.jpg",
+            "title": "Sometimes / I Found Love",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/sometimes-i-found-love-single/1729854786"
+          }
+        },
+        "release_wwyd": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-wwyd.jpg",
+            "title": "WWYD",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/wwyd-single/1762996159"
+          }
+        },
+        "release_in_the_dusk": {
+          "type": "release",
+          "settings": {
+            "cover_file": "bi-release-in-the-dusk.jpg",
+            "title": "in the dusk",
+            "kind": "single",
+            "url": "https://music.apple.com/us/album/in-the-dusk-single/1785448570"
+          }
+        }
+      },
+      "block_order": [
+        "release_running_away",
+        "release_safe_sound",
+        "release_sooner",
+        "release_caving_in",
+        "release_i_want_you",
+        "release_honestly",
+        "release_knight_a_nice_dress",
+        "release_a_nice_dress",
+        "release_screaming_shouting",
+        "release_maybe_i",
+        "release_time_went_by",
+        "release_many_times",
+        "release_lush",
+        "release_dreams",
+        "release_arruba",
+        "release_you_i",
+        "release_sometimes_i_found_love",
+        "release_wwyd",
+        "release_in_the_dusk"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "Music",
+        "spotify_url": "https://open.spotify.com/artist/6tQZ5A1EKJnSlcyj5iZqZZ",
+        "apple_url": "https://music.apple.com/us/artist/blue-imagined/1719688130",
+        "youtube_url": "https://www.youtube.com/@BlueImagined1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

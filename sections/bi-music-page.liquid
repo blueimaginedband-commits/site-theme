@@ -1,0 +1,133 @@
+{%- comment -%}
+  Blue Imagined Music page: every release as a square cover with the title underneath,
+  filterable by type (All / Albums / EPs / Singles). Tabs only appear for types that exist.
+{%- endcomment -%}
+
+{{ 'section-bi-home.css' | asset_url | stylesheet_tag }}
+{{ 'section-bi-pages.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign releases = section.blocks | where: 'type', 'release'
+  assign album_count = 0
+  assign ep_count = 0
+  assign single_count = 0
+  for r in releases
+    case r.settings.kind
+      when 'album'
+        assign album_count = album_count | plus: 1
+      when 'ep'
+        assign ep_count = ep_count | plus: 1
+      else
+        assign single_count = single_count | plus: 1
+    endcase
+  endfor
+  assign heading = section.settings.heading | default: page.title
+-%}
+
+<div class="bi-home bi-page color-{{ section.settings.color_scheme }} gradient">
+  <section class="bi-sec page-width" data-bi-filter>
+    <div class="bi-sec__head bi-page__head">
+      <h1>{{ heading | escape }}</h1>
+      {%- assign kinds_present = 0 -%}
+      {%- if album_count > 0 -%}{%- assign kinds_present = kinds_present | plus: 1 -%}{%- endif -%}
+      {%- if ep_count > 0 -%}{%- assign kinds_present = kinds_present | plus: 1 -%}{%- endif -%}
+      {%- if single_count > 0 -%}{%- assign kinds_present = kinds_present | plus: 1 -%}{%- endif -%}
+      {%- if kinds_present > 1 -%}
+        <div class="bi-tabs" role="group" aria-label="Filter releases">
+          <button type="button" class="bi-tab" data-kind="all" aria-pressed="true">All</button>
+          {%- if album_count > 0 -%}<button type="button" class="bi-tab" data-kind="album" aria-pressed="false">Albums</button>{%- endif -%}
+          {%- if ep_count > 0 -%}<button type="button" class="bi-tab" data-kind="ep" aria-pressed="false">EPs</button>{%- endif -%}
+          {%- if single_count > 0 -%}<button type="button" class="bi-tab" data-kind="single" aria-pressed="false">Singles</button>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="bi-grid bi-grid--4 bi-releases">
+      {%- for block in releases -%}
+        <a class="bi-card bi-card--release" data-kind="{{ block.settings.kind }}" href="{{ block.settings.url | default: '#' }}" {% if block.settings.url contains 'http' %}target="_blank" rel="noopener"{% endif %} {{ block.shopify_attributes }}>
+          <div class="bi-card__art">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 800
+                | image_tag: widths: '300, 500, 800', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', alt: block.settings.title
+              }}
+            {%- elsif block.settings.cover_file != blank -%}
+              <img src="{{ block.settings.cover_file | asset_url }}" alt="{{ block.settings.title | escape }}" width="800" height="800" loading="lazy">
+            {%- else -%}
+              {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            <span class="bi-card__cta">Listen now</span>
+          </div>
+          <div class="bi-card__meta">
+            <h3>{{ block.settings.title | escape }}</h3>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+
+    {%- capture listen_links -%}
+      {%- if section.settings.spotify_url != blank -%}<a href="{{ section.settings.spotify_url }}" target="_blank" rel="noopener">Spotify</a>{%- endif -%}
+      {%- if section.settings.apple_url != blank -%}<a href="{{ section.settings.apple_url }}" target="_blank" rel="noopener">Apple Music</a>{%- endif -%}
+      {%- if section.settings.youtube_url != blank -%}<a href="{{ section.settings.youtube_url }}" target="_blank" rel="noopener">YouTube</a>{%- endif -%}
+    {%- endcapture -%}
+    {%- if listen_links != blank -%}
+      <div class="bi-more"><p class="bi-more__listen">Listen on {{ listen_links }}</p></div>
+    {%- endif -%}
+  </section>
+</div>
+
+<script>
+  (function () {
+    var root = document.currentScript.previousElementSibling.querySelector('[data-bi-filter]');
+    if (!root) return;
+    var tabs = root.querySelectorAll('.bi-tab');
+    var cards = root.querySelectorAll('.bi-releases [data-kind]');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var kind = tab.dataset.kind;
+        tabs.forEach(function (t) { t.setAttribute('aria-pressed', t === tab ? 'true' : 'false'); });
+        cards.forEach(function (c) { c.hidden = kind !== 'all' && c.dataset.kind !== kind; });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Blue Imagined music",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-2" },
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave empty to use the page title." },
+    { "type": "url", "id": "spotify_url", "label": "Spotify link" },
+    { "type": "url", "id": "apple_url", "label": "Apple Music link" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube link" }
+  ],
+  "blocks": [
+    {
+      "type": "release",
+      "name": "Release",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Cover art" },
+        { "type": "text", "id": "cover_file", "label": "Cover file in theme assets", "info": "Used when no cover art is picked above." },
+        { "type": "text", "id": "title", "label": "Title", "default": "New release" },
+        {
+          "type": "select",
+          "id": "kind",
+          "label": "Type",
+          "options": [
+            { "value": "single", "label": "Single" },
+            { "value": "ep", "label": "EP" },
+            { "value": "album", "label": "Album" }
+          ],
+          "default": "single"
+        },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Blue Imagined music" } ]
+}
+{% endschema %}

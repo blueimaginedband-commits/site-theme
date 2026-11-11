@@ -1,0 +1,66 @@
+{%- comment -%}
+  Blue Imagined Merch page: every product in a collection, clothes straight on the page
+  with the name and price centred underneath (same look as the homepage).
+{%- endcomment -%}
+
+{{ 'section-bi-home.css' | asset_url | stylesheet_tag }}
+{{ 'section-bi-pages.css' | asset_url | stylesheet_tag }}
+
+{%- assign heading = section.settings.heading | default: page.title -%}
+{%- assign merch = section.settings.collection | default: collections.all -%}
+
+<div class="bi-home bi-page color-{{ section.settings.color_scheme }} gradient">
+  <section class="bi-sec page-width">
+    <div class="bi-sec__head bi-page__head">
+      <h1>{{ heading | escape }}</h1>
+      {%- if section.settings.label != blank -%}<p>{{ section.settings.label | escape }}</p>{%- endif -%}
+    </div>
+
+    {%- if merch.products_count > 0 -%}
+      <div class="bi-grid bi-grid--4 bi-releases">
+        {%- for product in merch.products limit: section.settings.products_to_show -%}
+          <a class="bi-card bi-card--product" href="{{ product.url }}">
+            <div class="bi-card__art bi-card__art--product">
+              {%- if product.featured_media != blank -%}
+                {%- assign media_alt = product.featured_media.alt | default: product.title | escape -%}
+                {{
+                  product.featured_media
+                  | image_url: width: 800
+                  | image_tag: widths: '300, 500, 800', sizes: '(min-width: 990px) 25vw, 50vw', loading: 'lazy', alt: media_alt
+                }}
+              {%- else -%}
+                {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              <span class="bi-card__cta">{%- if product.available -%}Shop{%- else -%}Sold out{%- endif -%}</span>
+            </div>
+            <div class="bi-card__meta">
+              <h3>{{ product.title | escape }}</h3>
+              <span class="bi-card__tag">
+                {%- if product.price_varies -%}From {% endif -%}
+                {{- product.price_min | money_without_trailing_zeros -}}
+              </span>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="bi-tour"><div><p class="bi-tour__big">New merch soon</p><div class="bi-tour__text"><p>Nothing in the shop right now. Check back soon.</p></div></div></div>
+    {%- endif -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Blue Imagined merch",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-2" },
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave empty to use the page title." },
+    { "type": "text", "id": "label", "label": "Small label", "default": "Shop" },
+    { "type": "collection", "id": "collection", "label": "Collection", "info": "Leave empty to show every product." },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 4, "max": 48, "step": 4, "default": 24 }
+  ],
+  "presets": [ { "name": "Blue Imagined merch" } ]
+}
+{% endschema %}

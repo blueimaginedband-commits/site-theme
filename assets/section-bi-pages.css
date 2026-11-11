@@ -1,0 +1,124 @@
+/* Blue Imagined inner pages (Music, Tour). Builds on section-bi-home.css. */
+.bi-page .bi-sec { padding-top: clamp(40px, 6vw, 80px); }
+.bi-page__head { align-items: flex-end; }
+.bi-page__head h1 { font-size: clamp(5.6rem, 9vw, 12rem); line-height: 0.85; margin: 0; }
+
+/* Filter tabs (All / Albums / EPs / Singles) */
+.bi-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem 2rem; }
+.bi-tab {
+  background: none;
+  border: 0;
+  padding: 0.4rem 0;
+  cursor: pointer;
+  font-family: var(--bi-display);
+  font-size: clamp(1.8rem, 1.6vw, 2.2rem);
+  color: rgba(var(--color-foreground), 0.5);
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.bi-tab:hover { color: rgb(var(--color-foreground)); }
+.bi-tab[aria-pressed="true"] { color: rgb(var(--color-foreground)); border-bottom-color: var(--bi-cobalt); }
+.bi-tab:focus-visible { outline: 2px solid var(--bi-frost); outline-offset: 4px; }
+
+.bi-releases { row-gap: clamp(28px, 4vw, 48px); }
+.bi-releases .bi-card[hidden] { display: none; }
+
+/* Tour page */
+.bi-tourpage {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+.bi-tourpage--no-photo { grid-template-columns: minmax(0, 1fr); }
+.bi-tourpage__photo { position: relative; overflow: hidden; }
+.bi-tourpage__photo img { width: 100%; height: auto; display: block; }
+.bi-tourpage__photo::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px var(--bi-line); pointer-events: none; }
+.bi-tour--stack { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+
+.bi-shows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--bi-line); }
+.bi-show {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr) auto;
+  gap: 1.6rem;
+  align-items: center;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--bi-line);
+}
+.bi-show__date { font-family: var(--bi-display); font-size: 2.4rem; text-transform: uppercase; line-height: 1; }
+.bi-show__where { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.bi-show__city { font-family: var(--bi-display); font-size: 2.4rem; line-height: 1.05; }
+.bi-show__venue { font-size: 1.3rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(var(--color-foreground), 0.6); }
+.bi-show__status { font-size: 1.2rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(var(--color-foreground), 0.5); }
+.bi-show--sold-out .bi-show__city, .bi-show--sold-out .bi-show__date { opacity: 0.5; }
+
+@media screen and (max-width: 989px) {
+  .bi-tourpage { grid-template-columns: minmax(0, 1fr); }
+}
+@media screen and (max-width: 559px) {
+  .bi-page__head { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+  .bi-show { grid-template-columns: minmax(0, 1fr) auto; }
+  .bi-show__date { grid-column: 1 / -1; font-size: 1.8rem; }
+}
+
+/* Contact page */
+.bi-contact {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: start;
+}
+.bi-contact__social { list-style: none; margin: 2.8rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.6rem 2.4rem; }
+.bi-contact__social a {
+  font-family: var(--bi-display);
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.bi-contact__social a:hover { color: var(--bi-frost); }
+
+.bi-form { display: grid; gap: 2rem; }
+.bi-form__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+.bi-field { display: grid; gap: 0.8rem; min-width: 0; }
+.bi-contact > *, .bi-form > * { min-width: 0; }
+.bi-field label {
+  font-size: 1.2rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.65);
+}
+.bi-field input,
+.bi-field select,
+.bi-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 1.6rem;
+  color: rgb(var(--color-foreground));
+  background: rgba(184, 207, 251, 0.04);
+  border: 1px solid var(--bi-line);
+  border-radius: 0;
+  padding: 1.3rem 1.4rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.bi-field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 20px) 50%, calc(100% - 15px) 50%; background-size: 5px 5px; background-repeat: no-repeat; }
+.bi-field select option { background: var(--bi-night); }
+.bi-field textarea { resize: vertical; min-height: 16rem; }
+.bi-field input:focus,
+.bi-field select:focus,
+.bi-field textarea:focus { outline: none; border-color: var(--bi-cobalt); box-shadow: 0 0 0 3px rgba(59, 116, 255, 0.25); }
+.bi-field input[aria-invalid="true"] { border-color: #ff6b6b; }
+.bi-form__submit { justify-self: start; background: none; cursor: pointer; font-family: var(--bi-body); }
+.bi-form__note { margin: 0; padding: 1.4rem 1.6rem; border: 1px solid var(--bi-line); font-size: 1.5rem; }
+.bi-form__note--ok { border-color: var(--bi-cobalt); }
+.bi-form__note--error { border-color: #ff6b6b; }
+.bi-form__note ul { margin: 0.6rem 0 0; padding-left: 1.8rem; }
+
+@media screen and (max-width: 989px) {
+  .bi-contact { grid-template-columns: minmax(0, 1fr); }
+}
+@media screen and (max-width: 559px) {
+  .bi-form__row { grid-template-columns: minmax(0, 1fr); }
+}

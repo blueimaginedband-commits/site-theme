@@ -1,0 +1,86 @@
+{%- comment -%}
+  Blue Imagined Contact page: short intro and social links beside a message form.
+  Messages go to the store's contact email (Shopify admin > Settings > Store details).
+{%- endcomment -%}
+
+{{ 'section-bi-home.css' | asset_url | stylesheet_tag }}
+{{ 'section-bi-pages.css' | asset_url | stylesheet_tag }}
+
+{%- assign heading = section.settings.heading | default: page.title -%}
+
+<div class="bi-home bi-page color-{{ section.settings.color_scheme }} gradient">
+  <section class="bi-sec page-width">
+    <div class="bi-sec__head bi-page__head">
+      <h1>{{ heading | escape }}</h1>
+      {%- if section.settings.label != blank -%}<p>{{ section.settings.label | escape }}</p>{%- endif -%}
+    </div>
+
+    <div class="bi-contact">
+      <div class="bi-contact__intro">
+        {%- if section.settings.intro_heading != blank -%}<p class="bi-tour__big">{{ section.settings.intro_heading | escape }}</p>{%- endif -%}
+        {%- if section.settings.intro_text != blank -%}<div class="bi-tour__text">{{ section.settings.intro_text }}</div>{%- endif -%}
+        <ul class="bi-contact__social">
+          {%- if settings.social_instagram_link != blank -%}<li><a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener">Instagram</a></li>{%- endif -%}
+          {%- if settings.social_tiktok_link != blank -%}<li><a href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener">TikTok</a></li>{%- endif -%}
+          {%- if settings.social_youtube_link != blank -%}<li><a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener">YouTube</a></li>{%- endif -%}
+          {%- if section.settings.spotify_url != blank -%}<li><a href="{{ section.settings.spotify_url }}" target="_blank" rel="noopener">Spotify</a></li>{%- endif -%}
+        </ul>
+      </div>
+
+      {%- form 'contact', id: 'BiContactForm', class: 'bi-form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="bi-form__note bi-form__note--ok" role="status" tabindex="-1" autofocus>Thanks, your message is sent. We'll get back to you soon.</p>
+        {%- elsif form.errors -%}
+          <div class="bi-form__note bi-form__note--error" role="alert" tabindex="-1" autofocus>
+            <p>Please fix the following and send again:</p>
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="bi-form__row">
+          <div class="bi-field">
+            <label for="BiContactForm-name">Name</label>
+            <input id="BiContactForm-name" type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}">
+          </div>
+          <div class="bi-field">
+            <label for="BiContactForm-email">Email <span aria-hidden="true">*</span></label>
+            <input id="BiContactForm-email" type="email" name="contact[email]" autocomplete="email" spellcheck="false" autocapitalize="off" value="{{ form.email }}" required aria-required="true"{% if form.errors contains 'email' %} aria-invalid="true"{% endif %}>
+          </div>
+        </div>
+        <div class="bi-field">
+          <label for="BiContactForm-subject">What's it about?</label>
+          <select id="BiContactForm-subject" name="contact[subject]">
+            {%- assign topics = section.settings.topics | split: ',' -%}
+            {%- for t in topics -%}
+              {%- assign topic = t | strip -%}
+              {%- if topic != blank -%}<option value="{{ topic | escape }}"{% if form.subject == topic %} selected{% endif %}>{{ topic | escape }}</option>{%- endif -%}
+            {%- endfor -%}
+          </select>
+        </div>
+        <div class="bi-field">
+          <label for="BiContactForm-body">Message</label>
+          <textarea id="BiContactForm-body" name="contact[body]" rows="7">{{ form.body }}</textarea>
+        </div>
+        <button type="submit" class="bi-pill bi-form__submit">Send message</button>
+      {%- endform -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Blue Imagined contact",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Colour scheme", "default": "scheme-2" },
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave empty to use the page title." },
+    { "type": "text", "id": "label", "label": "Small label", "default": "Get in touch" },
+    { "type": "text", "id": "intro_heading", "label": "Intro heading", "default": "Say hi" },
+    { "type": "richtext", "id": "intro_text", "label": "Intro text", "default": "<p>Booking, press, collabs or anything else. Send us a message and we'll get back to you.</p>" },
+    { "type": "text", "id": "topics", "label": "Topics", "default": "General, Booking, Press, Merch order", "info": "Comma-separated list for the \"What's it about?\" menu." },
+    { "type": "url", "id": "spotify_url", "label": "Spotify link" }
+  ],
+  "presets": [ { "name": "Blue Imagined contact" } ]
+}
+{% endschema %}

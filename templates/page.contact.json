@@ -1,1 +1,19 @@
-{"sections":{"1762555281828a23fc":{"type":"_blocks","blocks":{"ai_gen_block_574cf46_nCyU8U":{"type":"ai_gen_block_574cf46","settings":{"text_color":"#ffffff","font_size":60,"padding_top":20,"padding_bottom":20},"blocks":{}}},"block_order":["ai_gen_block_574cf46_nCyU8U"],"settings":{}},"main":{"type":"main-page","disabled":true,"settings":{"padding_top":0,"padding_bottom":0}},"form":{"type":"contact-form","settings":{"heading":"","heading_size":"h1","color_scheme":"scheme-2","padding_top":0,"padding_bottom":0}}},"order":["1762555281828a23fc","main","form"]}
+{
+  "sections": {
+    "main": {
+      "type": "bi-contact-page",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "heading": "Contact",
+        "label": "Get in touch",
+        "intro_heading": "Say hi",
+        "intro_text": "<p>Booking, press, collabs or anything else. Send us a message and we'll get back to you.</p>",
+        "topics": "General, Booking, Press, Merch order",
+        "spotify_url": "https://open.spotify.com/artist/6tQZ5A1EKJnSlcyj5iZqZZ"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
