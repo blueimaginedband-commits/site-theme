@@ -1,0 +1,81 @@
+{% doc %}
+  @prompt
+    Just give me a heading that says "CONTACT" nothing else, no borders or anything. Black background and allow me to change the text color, make the borders small theres too much empty black space
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-contact-heading-{{ ai_gen_id }} {
+    background-color: #000000;
+    padding: {{ block.settings.padding_top }}px 20px {{ block.settings.padding_bottom }}px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .ai-contact-heading__text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-contact-heading__text-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.font_size }}px * 0.7);
+    }
+  }
+{% endstyle %}
+
+<div class="ai-contact-heading-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <h1 class="ai-contact-heading__text-{{ ai_gen_id }}">CONTACT</h1>
+</div>
+
+{% schema %}
+{
+  "name": "Contact heading",
+  "settings": [
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Font size",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact heading"
+    }
+  ]
+}
+{% endschema %}
