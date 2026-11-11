@@ -120,3 +120,31 @@ h3, .h3, h4, .h4 { font-family: var(--bi-display); font-weight: 400; text-transf
 @media (prefers-reduced-motion: reduce) {
   .bi-wordmark img { filter: none; }
 }
+
+/* Transparent header, like provoker.zone: no background, floats over the page.
+   On the homepage it sits on top of the photo instead of above it. */
+.section-header .header-wrapper,
+.section-header .header-wrapper.gradient {
+  background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+.section-header { background: transparent; }
+.section-header .header__heading-link,
+.section-header .header__menu-item,
+.section-header .header__icon {
+  text-shadow: 0 1px 10px rgba(7, 10, 18, 0.65);
+}
+.section-header .header__icon .svg-wrapper,
+.section-header .header__icon svg {
+  filter: drop-shadow(0 1px 6px rgba(7, 10, 18, 0.7));
+}
+/* Dropdowns and the phone menu keep a solid background so they stay readable */
+.section-header .header__submenu,
+.section-header .menu-drawer,
+.section-header .search-modal {
+  background: var(--bi-night);
+}
+body:has(.bi-hero) #MainContent {
+  margin-top: calc(-1 * var(--header-height, 0px));
+}
